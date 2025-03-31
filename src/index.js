@@ -1,9 +1,11 @@
 import cors from 'cors';
 import express from "express";
 import { configDotenv } from 'dotenv';
-import jwtRouter from "./routes/jwtRoute.js";
+
 import { client } from './db/mongo.config.js';
-import { blogsRouter } from './routes/blogsRoute.js';
+import jwtRouter from "./routes/jwtRoute.js";
+import blogsRouter from './routes/blogsRoute.js';
+import searchRouter from './routes/searchRoute.js';
 
 configDotenv()
 const app = express();
@@ -13,6 +15,7 @@ app.use(cors({credentials: true, origin: ['http://localhost:5173']}))
 app.use(express.json())
 app.use(jwtRouter)
 app.use(blogsRouter)
+app.use(searchRouter)
 
 app.get('/', (req, res) => {
     res.send('The server is running!')
