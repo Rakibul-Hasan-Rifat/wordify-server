@@ -6,6 +6,8 @@ import { client } from './db/mongo.config.js';
 import jwtRouter from "./routes/jwtRoute.js";
 import blogsRouter from './routes/blogsRoute.js';
 import searchRouter from './routes/searchRoute.js';
+import singleBlogRouter from './routes/singleBlogRoute.js';
+import uniqueCategoryRouter from './routes/uniqueCategoryRoute.js';
 
 configDotenv()
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.json())
 app.use(jwtRouter)
 app.use(blogsRouter)
 app.use(searchRouter)
+app.use(singleBlogRouter)
+app.use(uniqueCategoryRouter)
 
 app.get('/', (req, res) => {
     res.send('The server is running!')
