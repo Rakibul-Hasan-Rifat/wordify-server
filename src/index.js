@@ -8,6 +8,7 @@ import blogsRouter from './routes/blogsRoute.js';
 import searchRouter from './routes/searchRoute.js';
 import singleBlogRouter from './routes/singleBlogRoute.js';
 import uniqueCategoryRouter from './routes/uniqueCategoryRoute.js';
+import wishlistRouter from './routes/wishlistRoute.js';
 
 configDotenv()
 const app = express();
@@ -15,9 +16,11 @@ const port = process.env.PORT || 4321;
 
 app.use(cors({credentials: true, origin: ['http://localhost:5173']}))
 app.use(express.json())
+
 app.use(jwtRouter)
 app.use(blogsRouter)
 app.use(searchRouter)
+app.use(wishlistRouter)
 app.use(singleBlogRouter)
 app.use(uniqueCategoryRouter)
 
