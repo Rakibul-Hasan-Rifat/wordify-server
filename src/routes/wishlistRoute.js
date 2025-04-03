@@ -1,14 +1,26 @@
 import express from "express";
-import { wishlistController } from "../controllers/wishlistController.js";
+import {
+  wishlistGet,
+  wishlistPost,
+  singleWishlistItemGet,
+} from "../controllers/wishlistController.js";
 
 const wishlistRouter = express.Router();
 
 wishlistRouter
-  .route("/wish-list")
+  .route("/wish-list/:email")
   .all((req, res, next) => {
     next();
   })
-  .get((req, res) => {})
-  .post(wishlistController);
+  .get(wishlistGet)
+  .post(wishlistPost);
+
+wishlistRouter
+  .route("/blogs/wish-list/:id")
+  .all((req, res, next) => {
+    console.log('wishlist single router');
+    next();
+  })
+  .get(singleWishlistItemGet);
 
 export default wishlistRouter;
