@@ -2,6 +2,7 @@ import express from "express";
 import {
   wishlistGet,
   wishlistPost,
+  wishlistRemove,
   singleWishlistItemGet,
 } from "../controllers/wishlistController.js";
 
@@ -13,7 +14,8 @@ wishlistRouter
     next();
   })
   .get(wishlistGet)
-  .post(wishlistPost);
+  .post(wishlistPost)
+  .delete(wishlistRemove);
 
 wishlistRouter
   .route("/blogs/wish-list/:id")

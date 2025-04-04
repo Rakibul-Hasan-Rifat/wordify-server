@@ -11,6 +11,28 @@ export const wishlistGet = async (req, res) => {
   res.send(wishlists);
 };
 
+export const wishlistRemove = async (req, res) => {
+  const { email } = req.params;
+  const { blogId } = req.query;
+
+  const wishlist = await client
+    .db("wordify-blog")
+    .collection("wish-list")
+    .findOne({ userEmail: email }, { projection: { blogIds: 1, _id: 0 } });
+
+  console.log("wish-list remove", wishlist, blogId);
+
+  const result = await client
+    .db("wordify-blog")
+    .collection("wish-list")
+    .updateOne(
+      { userEmail: email },
+      { $set: { blogIds: wishlist.blogIds.filter((id) => id !== blogId) } }
+    );
+
+  res.send(result);
+};
+
 export const singleWishlistItemGet = async (req, res) => {
   const { id } = req.params;
   console.log("id", id);
@@ -28,7 +50,6 @@ export const singleWishlistItemGet = async (req, res) => {
 };
 
 export const wishlistPost = async (req, res) => {
-
   const { email, blogId } = req.body;
 
   const doesExist = await client
