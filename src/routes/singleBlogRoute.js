@@ -1,5 +1,5 @@
 import express from "express";
-import { singleBlogGetter } from "../controllers/singleBlogController.js";
+import { singleBlogGetter, singleBlogUpdater } from "../controllers/singleBlogController.js";
 
 const singleBlogRouter = express.Router();
 
@@ -8,6 +8,7 @@ singleBlogRouter
   .all((req, res, next) => {
     next();
   })
-  .get(singleBlogGetter);
+  .get(singleBlogGetter)
+  .put(singleBlogUpdater);
 
 export default singleBlogRouter;
