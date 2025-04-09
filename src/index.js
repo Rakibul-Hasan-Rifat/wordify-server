@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import { configDotenv } from "dotenv";
+import cookieParser from "cookie-parser";
 
 import { client } from "./db/mongo.config.js";
 import jwtRouter from "./routes/jwtRoute.js";
@@ -17,6 +18,7 @@ const port = process.env.PORT || 4321;
 
 app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(jwtRouter);
 app.use(blogsRouter);

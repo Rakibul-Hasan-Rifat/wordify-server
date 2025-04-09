@@ -9,8 +9,16 @@ export const singleBlogGetter = async (req, res) => {
   res.send(result);
 };
 
+export const singleBlogAdder = async (req, res) => {
+  const result = await client
+    .db("wordify-blog")
+    .collection("blogs")
+    .insertOne(req.body);
+
+  res.send(result);
+};
+
 export const singleBlogUpdater = async (req, res) => {
-  console.log(req.body);
   const result = await client
     .db("wordify-blog")
     .collection("blogs")
