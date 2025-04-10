@@ -3,20 +3,25 @@ import express from "express";
 import { configDotenv } from "dotenv";
 import cookieParser from "cookie-parser";
 
-import { client } from "./db/mongo.config.js";
-import jwtRouter from "./routes/jwtRoute.js";
-import blogsRouter from "./routes/blogsRoute.js";
-import searchRouter from "./routes/searchRoute.js";
-import wishlistRouter from "./routes/wishlistRoute.js";
-import singleBlogRouter from "./routes/singleBlogRoute.js";
-import featuredBlogRouter from "./routes/feauredBlogRoute.js";
-import uniqueCategoryRouter from "./routes/uniqueCategoryRoute.js";
+import { client } from "./src/db/mongo.config.js";
+import jwtRouter from "./src/routes/jwtRoute.js";
+import blogsRouter from "./src/routes/blogsRoute.js";
+import searchRouter from "./src/routes/searchRoute.js";
+import wishlistRouter from "./src/routes/wishlistRoute.js";
+import singleBlogRouter from "./src/routes/singleBlogRoute.js";
+import featuredBlogRouter from "./src/routes/feauredBlogRoute.js";
+import uniqueCategoryRouter from "./src/routes/uniqueCategoryRoute.js";
 
 configDotenv();
 const app = express();
 const port = process.env.PORT || 4321;
 
-app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:5173", "https://wordify-client.web.app"],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
